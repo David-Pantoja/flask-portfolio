@@ -44,6 +44,7 @@ education_data = json.load(c)
 c.close()
 education_d = education_data.copy()
 
+
 @app.route('/')
 def index():
     return render_template('index.html')
@@ -85,3 +86,8 @@ def get_time_line_post():
             for p in TimelinePost.select().order_by(TimelinePost.created_at.desc())
         ]
     }
+
+
+@app.route('/timeline')
+def timeline():
+    return render_template('timeline.html', title="Timeline", timelineuploads=get_time_line_post()["timeline_posts"])

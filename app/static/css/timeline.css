@@ -1,0 +1,72 @@
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@200;600;300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200&display=swap');
+
+/* for the navbar*/
+body {
+    background-color: #F5F5F5;
+}
+
+.top-menu ul{
+    list-style: none;
+    text-align: center;
+}
+
+.top-menu li{
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1.5em;
+    margin: 2em 3em 1em 1em;
+    display: inline-block;
+}
+
+.top-menu li a{
+    text-decoration: none;
+    color: #588157;
+}
+
+.top-menu ul #h, .top-menu ul #w a{
+    font-weight: 700;
+    color: #344E41;
+}
+
+/*for the heading*/
+.home {
+    overflow: hidden;
+}
+
+.home-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.home-header{
+    padding: 1em 2em 2em 5em;
+}
+
+.home-header h1 {
+    text-align: left;
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 600;
+    font-size: 4em;
+}
+.home-header span {
+    text-align: left;
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 300;
+}
+
+.home-header h2 {
+    justify-content: left;
+    text-align: left;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 2em;
+}
+
+.home-header h2 span{
+    text-align: left;
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 520;
+    font-size: 1em;
+}
+

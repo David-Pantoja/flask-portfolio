@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<!--Here goes the title of the page -->
+<title>Portfolio MLH</title>
+<link rel="stylesheet" href='./static/css/timeline.css'>
+{% endblock %}
+
+{% block body %}
+
+<div class="top-menu">
+    <ul>
+        <li><a href="{{ url_for('index')}}">home</a></li>
+        <li id="a"><a href="{{ url_for('aboutme')}}">about</a></li>
+        <li><a href="{{ url_for('work')}}">work</a></li>
+        <li><a href="{{ url_for('hobbies')}}">hobbies</a></li>
+        <li><a href="{{ url_for('education')}}">education</a></li>
+        <li><a href="{{ url_for('travel')}}">traveling</a></li>
+        <li><a href="{{ url_for('timeline')}}">timeline</a></li>
+    </ul>
+</div>
+
+
+<div class="home" id="home">
+    <div class="home-content">
+        <div class="home-header">
+            <h1>Check out my<br><span>Timeline 👋</span></h1>
+            <form action = "http://localhost:5000/api/timeline_post" method = "post">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name"><br><br>
+                <label for="email">Email:</label>
+                <input type="text" id="email" name="email"><br><br>
+                <label for="content">Content:</label>
+                <input type="text" id="content" name="content"><br><br>
+                <input type="submit" value="Submit">
+             </form>
+        
+            {% for timelineupload in timelineuploads %}
+             <h2><span>{{ timelineupload.name }} - {{ timelineupload.email }}</span><br>{{ timelineupload.content }}</h2>
+            {% endfor %}
+
+
+        </div>
+     </div>
+</div>
+
+{% endblock %}
