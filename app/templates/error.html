@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<!--Here goes the title of the page -->
+<title>Portfolio MLH</title>
+<link rel="stylesheet" href='./static/css/index.css'>
+{% endblock %}
+
+{% block body %}
+<!--Here goes the body of the page -->
+
+<div class="top-menu">
+    <ul>
+        <li id="h"><a href="{{ url_for('index')}}">home</a></li>
+        <li><a href="{{ url_for('aboutme')}}">about</a></li>
+        <li><a href="{{ url_for('work')}}">work</a></li>
+        <li><a href="{{ url_for('hobbies')}}">hobbies</a></li>
+        <li><a href="{{ url_for('education')}}">education</a></li>
+        <li><a href="{{ url_for('travel')}}">traveling</a></li>
+        <li><a href="{{ url_for('timeline')}}">timeline</a></li>
+    </ul>
+</div>
+
+<h1>Invalid {{ error }}</h1>
+{% endblock %}
