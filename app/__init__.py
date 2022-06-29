@@ -1,19 +1,26 @@
 from datetime import datetime
-from flask import Flask, render_template, request
+from flask import Flask, redirect, render_template, request, Response
 from playhouse.shortcuts import model_to_dict
+from dotenv import load_dotenv
 import json
 import os
 from jinja2 import Environment, FileSystemLoader
 from peewee import *
+from pymysql import NULL
 
+load_dotenv()
 app = Flask(__name__)
-#mydb = MySQLDatabase(os.getenv("MYSQL_DATABASE"),
-mydb = MySQLDatabase("myportfoliodb",
-    user="myportfolio",
-    password="mypassword",
-    host="localhost",
-    port=3306
-)
+
+if os.getenv("TESTING") == "True":
+    print("Running in test mode")
+    mydb = SqliteDatabase('file:memory?mode=memory&cache=shared', uri=True)
+else:
+    mydb = MySQLDatabase(os.getenv("MYSQL_DATABASE"),
+        user=os.getenv("MYSQL_USER"),
+        password=os.getenv("MYSQL_PASSWORD"),
+        host=os.getenv("MYSQL_HOST"),
+        port=3306
+    )
 
 class TimelinePost(Model):
     name = CharField()
@@ -23,8 +30,6 @@ class TimelinePost(Model):
 
     class Meta:
         database = mydb
-
-print(mydb)
 
 mydb.connect()
 mydb.create_tables([TimelinePost])
@@ -71,12 +76,33 @@ def travel():
 
 @app.route('/api/timeline_post', methods=['POST'])
 def post_time_line_post():
-    name = request.form['name']
-    email = request.form['email']
-    content = request.form['content']
-    Timeline_post = TimelinePost.create(name=name, email=email, content=content)
 
-    return model_to_dict(Timeline_post)
+    try:
+        name = request.form['name']
+        if name == "" or name == NULL:
+            return Response(render_template('error.html', error="name"), 400)
+    except:
+        return Response(render_template('error.html', error="name"), 400)
+
+
+    try:
+        email = request.form['email']
+        if email == "" or email == NULL or not ('@' in email and '.' in email):
+            return Response(render_template('error.html', error="email"), 400)
+    except:
+        return Response(render_template('error.html', error="email"), 400)
+
+
+    try:
+        content = request.form['content']
+        if content == "" or content == NULL:
+            return Response(render_template('error.html', error="content"), 400)
+    except:
+        return Response(render_template('error.html', error="content"), 400)
+
+    Timeline_post = TimelinePost.create(name=name, email=email, content=content)
+    model_to_dict(Timeline_post)
+    return redirect("/timeline", code=302)
 
 @app.route('/api/timeline_post', methods=['GET'])
 def get_time_line_post():
