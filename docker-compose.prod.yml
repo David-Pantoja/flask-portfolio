@@ -4,8 +4,6 @@ services:
     container_name: myportfolio
     build: .
     restart: always
-    ports:
-      - "5000:5000"
     env_file:
       - .env
     depends_on:
@@ -25,7 +23,7 @@ services:
     image: jonasal/nginx-certbot
     restart: always
     environment:
-      - CERTBOT_EMAIL=name@example.com 
+      - CERTBOT_EMAIL=david27pantoja@gmail.com
     ports:
       - 80:80
       - 443:443
