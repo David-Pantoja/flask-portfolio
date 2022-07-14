@@ -11,9 +11,9 @@ from pymysql import NULL
 load_dotenv()
 app = Flask(__name__)
 
-print(os.getenv("MYSQL_DATABASE"))
+print("env test status", os.getenv("TESTING"))
 
-if os.getenv("TESTING") == "true":
+if os.getenv("TESTING").lower() == "true":
     print("Running in test mode")
     mydb = SqliteDatabase('file:memory?mode=memory&cache=shared', uri=True)
 else:

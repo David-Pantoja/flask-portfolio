@@ -1,7 +1,7 @@
 import unittest
 import os
 from urllib import response
-os.environ['TESTING'] = 'True'
+os.environ['TESTING'] = 'true'
 
 import sys
 sys.path.insert(0,'app/')
